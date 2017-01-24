@@ -30,7 +30,7 @@ Add this to your local.xml file:
 ### Sessionless Requests  
 You can define certain request URIs as being sessionless, this is particularly useful for ajax requests which do not vary content by customer (Eg. ajax stock request).  
 
-Add the following to your local.xml file to make all requests to `some/path/here` and `another/different/path` sessionless. 
+Add the following to your local.xml file to make all requests to `some/path/here` and `another/different/path/with/additional` sessionless. 
 
 ``` 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -38,7 +38,7 @@ Add the following to your local.xml file to make all requests to `some/path/here
     <global>
         [...]
         <aoeblackholesession>
-            <uri_regex><![CDATA[^(some\/path\/here|another\/different\/path)$^]]></uri_regex>
+            <uri_regex><![CDATA[^(some\/path\/here|another\/different\/path?(.*))$^]]></uri_regex>
         </aoeblackholesession>
         [...]
     </global>
