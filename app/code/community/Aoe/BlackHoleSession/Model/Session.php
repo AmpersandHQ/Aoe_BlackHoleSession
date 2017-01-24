@@ -17,7 +17,7 @@ class Aoe_BlackHoleSession_Model_Session extends Mage_Core_Model_Session
 
         if (!$this->isSessionlessRequest && !empty($_SERVER['REQUEST_URI'])) {
             $uriRegex = (string) $this->getBlackHoleConfig()->descend('uri_regex');
-            if ($uriRegex && preg_match($uriRegex, rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'))) {
+            if ($uriRegex && preg_match($uriRegex, $_SERVER['REQUEST_URI'])) {
                 $this->isSessionlessRequest = true;
             }
         }
