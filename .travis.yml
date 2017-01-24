@@ -1,0 +1,21 @@
+language: php
+php:
+  - 5.5
+
+before_install:
+  - XDEBUG_CONF=~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+  - mv "$XDEBUG_CONF" "$XDEBUG_CONF".bak
+
+install:
+  # Composer install
+  - composer self-update
+  - composer install -o --no-interaction --prefer-dist
+  - ./tests/travis.sh
+
+before_script: mv "$XDEBUG_CONF".bak "$XDEBUG_CONF"
+
+script:
+  - vendor/bin/phpunit
+
+cache:
+  directories: $HOME/.composer/cache

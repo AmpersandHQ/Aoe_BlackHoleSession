@@ -1,0 +1,5 @@
+.idea
+.php-version
+vendor
+tests/.modman
+tests/magento
