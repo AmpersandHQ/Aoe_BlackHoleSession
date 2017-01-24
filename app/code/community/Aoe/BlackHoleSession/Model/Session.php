@@ -7,7 +7,6 @@ class Aoe_BlackHoleSession_Model_Session extends Mage_Core_Model_Session
 
     public function __construct(array $data)
     {
-        parent::__construct($data);
         if (!empty($_SERVER['HTTP_USER_AGENT'])) {
             $config = Mage::getConfig()->getNode('global/aoeblackholesession');
             $botRegex = (string) $config->descend('bot_regex');
@@ -15,6 +14,7 @@ class Aoe_BlackHoleSession_Model_Session extends Mage_Core_Model_Session
                 $this->isBot = true;
             }
         }
+        parent::__construct($data);
     }
 
     public function getSessionSaveMethod()
