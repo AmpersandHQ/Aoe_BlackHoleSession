@@ -1,7 +1,8 @@
 # AOE_BlackHoleSession
 
-Author: [Fabrizio Branca](https://twitter.com/fbrnc)
-Author: [Luke Rodgers][https://twitter.com/lukerodgers90]
+Authors:
+- [Fabrizio Branca](https://twitter.com/fbrnc)
+- [Luke Rodgers](https://twitter.com/lukerodgers90)
 
 See: https://github.com/colinmollenhour/Cm_RedisSession/issues/91
 
