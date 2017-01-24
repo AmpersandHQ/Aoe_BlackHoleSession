@@ -10,14 +10,14 @@ class Aoe_BlackHoleSession_Model_Session extends Mage_Core_Model_Session
     {
         if (!empty($_SERVER['HTTP_USER_AGENT'])) {
             $botRegex = (string) $this->getBlackHoleConfig()->descend('bot_regex');
-            if (preg_match($botRegex, $_SERVER['HTTP_USER_AGENT'])) {
+            if ($botRegex && preg_match($botRegex, $_SERVER['HTTP_USER_AGENT'])) {
                 $this->isSessionlessRequest = true;
             }
         }
 
         if (!$this->isSessionlessRequest && !empty($_SERVER['REQUEST_URI'])) {
             $uriRegex = (string) $this->getBlackHoleConfig()->descend('uri_regex');
-            if (preg_match($uriRegex, $_SERVER['REQUEST_URI'])) {
+            if ($uriRegex && preg_match($uriRegex, rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'))) {
                 $this->isSessionlessRequest = true;
             }
         }

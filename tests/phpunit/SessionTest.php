@@ -116,6 +116,8 @@ class SessionTest extends PHPUnit_Framework_TestCase
             ['', 'some/path/here', 'files', 1],
             ['^(some\/path\/here|another\/different\/path)$^', 'another/different/path', 'user', 0],
             ['^(some\/path\/here|another\/different\/path)$^', 'another/alternative/path', 'files', 1],
+            ['^(some\/path\/here|another\/different\/path)$^', 'some/path/here/?var=1&foo=2', 'user', 0],
+            ['^(some\/path\/here|another\/different\/path)$^', 'some/path/here?var=1&foo=2', 'user', 0],
         ];
     }
 }
