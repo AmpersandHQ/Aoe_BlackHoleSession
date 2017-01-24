@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 DIR_TEST="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-DIR_PROJECT=$(realpath $DIR_TEST/../)
+DIR_PROJECT=$(readlink -f $DIR_TEST/../)
 DIR_TEST_MAGE="$DIR_TEST/magento"
 DIR_TEST_VENDOR="$DIR_TEST/vendor"
 
