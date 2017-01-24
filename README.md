@@ -23,3 +23,7 @@ Add this to your local.xml file:
     </global>
 </config>
 ```
+
+## Tests
+
+Look at the `tests/README.md` for full information.

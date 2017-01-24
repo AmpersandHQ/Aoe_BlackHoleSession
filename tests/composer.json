@@ -1,0 +1,17 @@
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.firegento.com"
+        }
+    ],
+    "require-dev": {
+        "aydin-hassan/magento-core-composer-installer" : "~1.0",
+        "magento/core": "1.9.3.1",
+        "n98/magerun": "^1.97",
+        "colinmollenhour/modman": "^1.12"
+    },
+    "extra": {
+        "magento-root-dir": "./magento/"
+    }
+}

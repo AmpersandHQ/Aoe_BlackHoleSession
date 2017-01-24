@@ -1,0 +1,7 @@
+<phpunit bootstrap="tests/bootstrap.php" syntaxCheck="true">
+    <testsuites>
+        <testsuite name="Aoe_BlackHoleSession Test Suite">
+            <directory>tests/phpunit</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
