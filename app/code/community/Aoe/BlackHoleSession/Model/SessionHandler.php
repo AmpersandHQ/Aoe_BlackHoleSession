@@ -27,7 +27,10 @@ class Aoe_BlackHoleSession_Model_SessionHandler implements SessionHandlerInterfa
 
     public function read($session_id)
     {
-        return self::$sessionData[$session_id];
+        if (isset(self::$sessionData[$session_id])) {
+            return self::$sessionData[$session_id];
+        }
+        return '';
     }
 
     public function write($session_id, $session_data)
