@@ -3,40 +3,22 @@
 class Aoe_BlackHoleSession_Model_Session extends Mage_Core_Model_Session
 {
 
-    protected $isSessionlessRequest = false;
-    protected $config;
+    protected $isUserSessionSaveMethod = false;
 
     public function __construct(array $data)
     {
-        if (!empty($_SERVER['HTTP_USER_AGENT'])) {
-            $botRegex = (string) $this->getBlackHoleConfig()->descend('bot_regex');
-            if ($botRegex && preg_match($botRegex, $_SERVER['HTTP_USER_AGENT'])) {
-                $this->isSessionlessRequest = true;
-            }
-        }
+        $singularity = Mage::getSingleton('aoeblackholesession/blackholer');
 
-        if (!$this->isSessionlessRequest && !empty($_SERVER['REQUEST_URI'])) {
-            $uriRegex = (string) $this->getBlackHoleConfig()->descend('uri_regex');
-            if ($uriRegex && preg_match($uriRegex, $_SERVER['REQUEST_URI'])) {
-                $this->isSessionlessRequest = true;
-                Mage::register('aoe_blackholesession_strip_cookies_from_response', true, true);
-            }
+        if ($singularity->isBot() || $singularity->isSessionlessRequest()) {
+            $this->isUserSessionSaveMethod = true;
         }
 
         parent::__construct($data);
     }
 
-    protected function getBlackHoleConfig()
-    {
-        if ($this->config === null) {
-            $this->config = Mage::getConfig()->getNode('global/aoeblackholesession');
-        }
-        return $this->config;
-    }
-
     public function getSessionSaveMethod()
     {
-        if ($this->isSessionlessRequest) {
+        if ($this->isUserSessionSaveMethod) {
             return 'user';
         } else {
             return parent::getSessionSaveMethod();
@@ -45,8 +27,9 @@ class Aoe_BlackHoleSession_Model_Session extends Mage_Core_Model_Session
 
     public function getSessionSavePath()
     {
-        if ($this->isSessionlessRequest) {
-            $sessionHandler = Mage::getModel('aoeblackholesession/sessionHandler'); /* @var $sessionHanlder Aoe_BlackHoleSession_Model_SessionHandler */
+        if ($this->isUserSessionSaveMethod) {
+            /* @var $sessionHanlder Aoe_BlackHoleSession_Model_SessionHandler */
+            $sessionHandler = Mage::getModel('aoeblackholesession/sessionHandler');
             return array($sessionHandler, 'setHandler');
         } else {
             return parent::getSessionSavePath();

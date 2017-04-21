@@ -18,20 +18,10 @@
             <core>
                 <rewrite>
                     <session>Aoe_BlackHoleSession_Model_Session</session>
+                    <cookie>Aoe_BlackHoleSession_Model_Cookie</cookie>
                 </rewrite>
             </core>
         </models>
-
-        <events>
-            <controller_front_send_response_before>
-                <observers>
-                    <aoeblackholesession>
-                        <class>aoeblackholesession/observer</class>
-                        <method>stripCookiesFromResponse</method>
-                    </aoeblackholesession>
-                </observers>
-            </controller_front_send_response_before>
-        </events>
 
     </global>
 
