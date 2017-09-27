@@ -87,37 +87,4 @@ class SessionTest extends PHPUnit_Framework_TestCase
             ['/^elb-healthchecker/i', 'chrome', 'files', 1],
         ];
     }
-
-    /**
-     * @dataProvider requestUriDataProvider
-     */
-    public function testRequestUri($uriRegex, $requestUri, $expectedSessionSaveMethod, $expectedSessionCount)
-    {
-        Mage::getConfig()->setNode('global/aoeblackholesession/uri_regex', $uriRegex);
-        $_SERVER['REQUEST_URI'] = $requestUri;
-
-        $session = Mage::getModel('core/session', array('name' => 'frontend'))->start();
-
-        $this->assertEquals($expectedSessionSaveMethod, (string)$session->getSessionSaveMethod());
-        session_write_close();
-
-        $this->assertCount(
-            $expectedSessionCount,
-            $this->getSessionFiles(),
-            "The wrong number of session files was encountered"
-        );
-    }
-
-    public function requestUriDataProvider()
-    {
-        return [
-            ['^(some\/path\/here?(.*)|another\/different\/path)$^', 'some/path/here', 'user', 0],
-            ['^(another\/different\/path)$^', 'some/path/here', 'files', 1],
-            ['', 'some/path/here', 'files', 1],
-            ['^(some\/path\/here?(.*)|another\/different\/path?(.*))$^', 'another/different/path/something/else?asdf=1', 'user', 0],
-            ['^(some\/path\/here?(.*)|another\/different\/path)$^', 'another/alternative/path', 'files', 1],
-            ['^(some\/path\/here?(.*)|another\/different\/path)$^', 'some/path/here/?var=1&foo=2', 'user', 0],
-            ['^(some\/path\/here?(.*)|another\/different\/path)$^', 'some/path/here?var=1&foo=2', 'user', 0],
-        ];
-    }
 }
