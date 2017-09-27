@@ -27,23 +27,21 @@ Add this to your local.xml file:
 </config>
 ```
 
-### Sessionless Requests  
-You can define certain request URIs as being sessionless, this is particularly useful for ajax requests which do not vary content by customer (Eg. ajax stock request).  
+### Stateless Requests  
 
-Add the following to your local.xml file to make all requests to `some/path/here` and `another/different/path/with/additional` sessionless. 
+Within your magento instance you can set a flag in your controllers predispatch such as 
 
-``` 
-<?xml version="1.0" encoding="UTF-8"?>
-<config>
-    <global>
-        [...]
-        <aoeblackholesession>
-            <uri_regex><![CDATA[^(some\/path\/here|another\/different\/path?(.*))$^]]></uri_regex>
-        </aoeblackholesession>
-        [...]
-    </global>
-</config>
 ```
+	public function preDispatch()
+	{
+		$this->setFlag('', self::FLAG_NO_START_SESSION, 1);
+		$this->setFlag('', self::FLAG_NO_COOKIES_REDIRECT, 1);
+		parent::preDispatch();
+		return $this;
+	}
+```
+
+However, other actions and observers may erroneously instantiate the session. This module hooks into a predispatch method to ensure no session is used or cookies are written when this flag is set.
 
 ## Tests
 

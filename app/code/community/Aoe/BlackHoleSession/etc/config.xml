@@ -17,12 +17,11 @@
         <models>
             <core>
                 <rewrite>
-                    <session>Aoe_BlackHoleSession_Model_Session</session>
-                    <cookie>Aoe_BlackHoleSession_Model_Cookie</cookie>
+                    <session>Aoe_BlackHoleSession_Model_Rewrite_Session</session>
+                    <cookie>Aoe_BlackHoleSession_Model_Rewrite_Cookie</cookie>
                 </rewrite>
             </core>
         </models>
-
     </global>
 
 </config>

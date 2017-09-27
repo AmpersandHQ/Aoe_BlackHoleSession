@@ -3,7 +3,7 @@ class Aoe_BlackHoleSession_Model_Cookie extends Mage_Core_Model_Cookie
 {
     public function set($name, $value, $period = null, $path = null, $domain = null, $secure = null, $httponly = null)
     {
-        if (Mage::getSingleton('aoeblackholesession/blackholer')->isSessionlessRequest()) {
+        if (Mage::getSingleton('aoeblackholesession/blackholer')->isStatelessRequest()) {
             return $this;
         }
 
@@ -12,7 +12,7 @@ class Aoe_BlackHoleSession_Model_Cookie extends Mage_Core_Model_Cookie
 
     public function delete($name, $path = null, $domain = null, $secure = null, $httponly = null)
     {
-        if (Mage::getSingleton('aoeblackholesession/blackholer')->isSessionlessRequest()) {
+        if (Mage::getSingleton('aoeblackholesession/blackholer')->isStatelessRequest()) {
             return $this;
         }
 

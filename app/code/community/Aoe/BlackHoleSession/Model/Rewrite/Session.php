@@ -7,9 +7,10 @@ class Aoe_BlackHoleSession_Model_Session extends Mage_Core_Model_Session
 
     public function __construct(array $data)
     {
-        $singularity = Mage::getSingleton('aoeblackholesession/blackholer');
+        /** @var Aoe_BlackHoleSession_Model_Blackholer $blackholer */
+        $blackholer = Mage::getSingleton('aoeblackholesession/blackholer');
 
-        if ($singularity->isBot() || $singularity->isSessionlessRequest()) {
+        if ($blackholer->isBot() || $blackholer->isStatelessRequest()) {
             $this->isUserSessionSaveMethod = true;
         }
 
