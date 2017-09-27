@@ -1,6 +1,6 @@
 <?php
 
-class Aoe_BlackHoleSession_Model_Session extends Mage_Core_Model_Session
+class Aoe_BlackHoleSession_Model_Rewrite_Session extends Mage_Core_Model_Session
 {
 
     protected $isUserSessionSaveMethod = false;
