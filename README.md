@@ -35,7 +35,6 @@ Within your magento instance you can set a flag in your controllers predispatch 
 	public function preDispatch()
 	{
 		$this->setFlag('', self::FLAG_NO_START_SESSION, 1);
-		$this->setFlag('', self::FLAG_NO_COOKIES_REDIRECT, 1);
 		parent::preDispatch();
 		return $this;
 	}
